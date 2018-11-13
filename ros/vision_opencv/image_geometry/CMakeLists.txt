@@ -11,7 +11,8 @@ catkin_package(CATKIN_DEPENDS sensor_msgs
 )
 
 catkin_python_setup()
-
+#XXX dirty hack
+include_directories("/home/mfusi/apollo-platform/ros/googletest/googletest/include")
 include_directories(include)
 include_directories(${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 

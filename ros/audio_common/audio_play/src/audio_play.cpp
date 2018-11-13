@@ -78,8 +78,11 @@ namespace audio_transport
         }
 
         GstBuffer *buffer = gst_buffer_new_and_alloc(msg->data.size());
-        memcpy(buffer->data, &msg->data[0], msg->data.size());
-
+        GstMapInfo map;
+        gst_buffer_map (buffer, &map, GST_MAP_WRITE); 
+        assert(msg->data.size() <= map.maxsize);
+ 	memcpy(map.data, &msg->data[0], msg->data.size());
+        gst_buffer_unmap(buffer, &map); 
         GstFlowReturn ret;
 
         g_signal_emit_by_name(_source, "push-buffer", buffer, &ret);
@@ -103,7 +106,8 @@ namespace audio_transport
         }
 
         /* check media type */
-        caps = gst_pad_get_caps (pad);
+	//XXX. FU: not sure about this
+        caps = gst_pad_get_current_caps (pad);
         str = gst_caps_get_structure (caps, 0);
         if (!g_strrstr (gst_structure_get_name (str), "audio")) {
           gst_caps_unref (caps);

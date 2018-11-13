@@ -137,10 +137,14 @@ namespace audio_transport
 
         GstBuffer *buffer;
         g_signal_emit_by_name(appsink, "pull-buffer", &buffer);
+	GstMapInfo map;
+        gst_buffer_map (buffer, &map, GST_MAP_READ); 
+        
+	audio_common_msgs::AudioData msg;
+        msg.data.resize( map.size );
+        memcpy( &msg.data[0], map.data, map.size );
 
-        audio_common_msgs::AudioData msg;
-        msg.data.resize( buffer->size );
-        memcpy( &msg.data[0], buffer->data, buffer->size);
+        gst_buffer_unmap(buffer,&map);
 
         server->publish(msg);
 

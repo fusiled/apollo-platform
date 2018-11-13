@@ -16,7 +16,9 @@ FASTRTPS_PATH="${CURRENT_PATH}/third_party/fast-rtps"
 TP_LIB_PATH="${CURRENT_PATH}/third_party/lib"
 
 BUILD_TYPE="Release"
-export LD_LIBRARY_PATH="${CURRENT_PATH}/third_party/fast-rtps/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="${CURRENT_PATH}/third_party/fast-rtps_aarch64/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="${CURRENT_PATH}/googletest/build/lib:$LD_LIBRARY_PATH"
+export CPATH="${PWD}/googletest/googletest/include:$CPATH"
 #--------------------------- function ------------------------------
 function info() {
   (>&2 echo -e "[\e[34m\e[1mINFO\e[0m] $*")

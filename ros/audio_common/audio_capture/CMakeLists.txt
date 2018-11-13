@@ -5,11 +5,14 @@ project(audio_capture)
 find_package(catkin REQUIRED COMPONENTS roscpp audio_common_msgs)
 
 find_package(PkgConfig)
-pkg_check_modules(GST gstreamer-0.10 REQUIRED)
+pkg_check_modules(GST gstreamer-1.0 REQUIRED)
 
 find_package(Boost REQUIRED COMPONENTS thread)
 
 include_directories(${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${GST_INCLUDE_DIRS})
+
+#XXX Dirty absolute path
+#link_directories("/home/mfusi/apollo-platform/ros/third_party/fast-rtps/lib")
 
 catkin_package()
 

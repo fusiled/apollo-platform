@@ -88,7 +88,7 @@ function(catkin_add_executable_with_gtest target)
   add_dependencies(${target} gtest gtest_main)
 endfunction()
 
-find_package(GTest QUIET)
+find_package(GTest QUIET PATHS "/usr/src/gtest")
 if(NOT GTEST_FOUND)
   # only add gtest directory once per workspace
   if(NOT TARGET gtest)
@@ -119,7 +119,7 @@ if(NOT GTEST_FOUND)
       set(_CATKIN_GTEST_BINARY_DIR ${CMAKE_BINARY_DIR}/gtest)
       add_subdirectory(${_CATKIN_GTEST_BASE_DIR} ${_CATKIN_GTEST_BINARY_DIR})
       # mark gtest targets with EXCLUDE_FROM_ALL to only build when tests are built which depend on them
-      set_target_properties(gtest gtest_main PROPERTIES EXCLUDE_FROM_ALL 1)
+      #set_target_properties(gtest gtest_main PROPERTIES EXCLUDE_FROM_ALL 1)
       get_filename_component(_CATKIN_GTEST_INCLUDE_DIR ${_CATKIN_GTEST_INCLUDE} PATH)
       get_filename_component(_CATKIN_GTEST_INCLUDE_DIR ${_CATKIN_GTEST_INCLUDE_DIR} PATH)
       # set from-source variables

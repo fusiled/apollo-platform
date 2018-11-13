@@ -17,6 +17,10 @@ include_directories(include)
 add_library(${PROJECT_NAME} src/camera_info_manager.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
+#XXX Dirty absolute path
+#link_directories("/home/mfusi/apollo-platform/ros/third_party/fast-rtps/lib")
+
+
 install(TARGETS ${PROJECT_NAME}
         DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         COMPONENT main

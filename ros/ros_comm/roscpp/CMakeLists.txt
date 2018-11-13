@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   cpp_common message_generation rosconsole roscpp_serialization roscpp_traits rosgraph_msgs rostime std_msgs xmlrpcpp
 )
 
+find_package(gflags REQUIRED)
 set(CMAKE_CXX_FLAGS "-g -std=c++11 ${CMAKE_CXX_FLAGS}")
 
 catkin_package_xml()
@@ -174,6 +175,7 @@ add_library(shm_manager SHARED
 
 add_dependencies(shm_manager roscpp)
 target_link_libraries(shm_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES} roscpp -fPIC)
+target_link_libraries(roscpp gflags)
 
 #explicitly install library and includes
 install(TARGETS roscpp

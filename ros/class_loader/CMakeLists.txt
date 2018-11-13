@@ -8,6 +8,10 @@ if(NOT CATKIN_DISABLED)
   find_package(catkin QUIET)
 endif()
 
+
+set(CMAKE_CXX_FLAGS "-fpermissive")
+add_definitions(-DCONSOLE_BRIDGE_log=log)
+
 find_package(console_bridge REQUIRED)
 
 if(${catkin_FOUND})

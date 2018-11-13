@@ -22,6 +22,7 @@ if(API_BACKCOMPAT_V1)
 endif()
 
 include_directories(include ${TinyXML_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+##Add additional boost include
 
 add_library(rospack
   src/rospack.cpp
@@ -29,16 +30,17 @@ add_library(rospack
   src/rospack_cmdline.cpp
   src/utils.cpp
 )
-target_link_libraries(rospack ${TinyXML_LIBRARIES} ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+target_link_libraries(rospack ${TinyXML_LIBRARIES} ${Boost_LIBRARIES} ${PYTHON_LIBRARIES} "boost_program_options")
 
 add_executable(rospackexe src/rospack_main.cpp)
 # Set the name, and make it a "global" executable
 set_target_properties(rospackexe PROPERTIES
   OUTPUT_NAME rospack
   RUNTIME_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/bin)
-target_link_libraries(rospackexe rospack ${Boost_LIBRARIES})
+target_link_libraries(rospackexe rospack ${Boost_LIBRARIES} "boost_program_options" )
 add_executable(rosstackexe src/rosstack_main.cpp)
-target_link_libraries(rosstackexe rospack ${Boost_LIBRARIES})
+
+target_link_libraries(rosstackexe "boost_program_options" rospack ${Boost_LIBRARIES} )
 # Set the name, and make it a "global" executable
 set_target_properties(rosstackexe PROPERTIES
   OUTPUT_NAME rosstack
